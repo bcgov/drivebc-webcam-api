@@ -46,4 +46,4 @@ Pull requests are welcome. If you would like to contribute, please see our [CONT
 
 ## License
 
-- All code in the /code directory is licensed under the Apache License 2.0. See [LICENSE.Apache-2.0](https://github.com/BCDevExchange/bc-property-api-specification/blob/master/Specs/LICENSE.Apache-2.0) in the appropriate directories.
+- All code in the /code directory is licensed under the Apache License 2.0. See [LICENSE.Apache-2.0](https://github.com/bcgov/drivebc-webcam-api/blob/master/Specs/LICENSE.Apache.2.0) in the appropriate directories.
