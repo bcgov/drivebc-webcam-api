@@ -1,0 +1,205 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "DriveBC Highway Cameras Open API - SANDBOX",
+        "description": "This API provides access to information about cameras (web cams) on highways in British Columbia.  It also provides access to the camera images, which can be used to view highway conditions, traffic, and weather information at a glance.",
+        "version": "1.0.0",
+        "license": {
+            "name": "Open Government License - British Columbia",
+            "url": "http://www.data.gov.bc.ca/local/dbc/docs/license/OGL-vbc2.0.pdf"
+        },
+        "termsOfService": "http://www.data.gov.bc.ca/local/dbc/docs/license/API_Terms_of_Use.pdf",
+        "contact": {
+            "name": "Drive BC",
+            "url": "http://www.drivebc.ca/",
+            "email": "TRANBMClientRelations@gov.bc.ca"
+        }
+    },
+    "host": "tst.api.webcams.open511.gov.bc.ca",
+    "basePath": "/v1",
+    "tags": [
+        {
+            "name": "webcams"
+        },
+        {
+            "name": "highways"
+        },
+        {
+            "name": "statistics"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "produces": [
+        "application/json",
+        "text/csv"
+    ],
+    "paths": {
+        "/webcams": {
+            "get": {
+                "description": "Returns information about cameras (web cams) on BC highways, including geographic location, orientation (direction), the last photo capture time, and a link to the camera image.",
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "The output format",
+                        "type": "string",
+                        "required": false,
+                        "default": "json",
+                        "enum": [
+                            "json",
+                            "csv"
+                        ]
+                    },
+                    {
+                        "name": "fields",
+                        "in": "query",
+                        "description": "A comma-separated list of camera attributes to include in the response. For example: 'id,links,isOn,camName,imageStats'. If not specified, all attributes are included.",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The page number and page size, separated by commas.  For example: '2,5' means page 2 with 5 cameras listed per page.  If not specified, the response includes information about all cameras.",
+                        "type": "string",
+                        "required": false
+                    }
+                ],
+                "tags": [
+                    "webcams"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of BC highway cameras and data related to those cameras"
+                    }
+                }
+            }
+        },
+        "/webcams/{webCamId}": {
+            "get": {
+                "description": "Returns information about a specific BC highway camera (web cam) identified by a unique ID.  The returned information can includ geographic location, orientation (direction), the last photo capture time, and a link to the camera image.",
+                "parameters": [
+                    {
+                        "name": "webCamId",
+                        "in": "path",
+                        "description": "The unique ID of a specific camera.  For example: '8' is the webCamId of a camera on Malahat Drive on Vancouver Island.",
+                        "type": "integer",
+                        "required": true
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "The output format",
+                        "type": "string",
+                        "required": false,
+                        "default": "json",
+                        "enum": [
+                            "json",
+                            "csv"
+                        ]
+                    },
+                    {
+                        "name": "fields",
+                        "in": "query",
+                        "description": "A comma-separated list of camera attributes to include in the response. For example: 'id,links,isOn,camName,imageStats'. If not specified, all attributes are included.",
+                        "type": "string",
+                        "required": false
+                    }
+                ],
+                "tags": [
+                    "webcams"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Information about one BC Highway camera"
+                    }
+                }
+            }
+        },
+        "/highways": {
+            "get": {
+                "description": "Returns a list of BC highways",
+                "tags": [
+                    "highways"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of BC highways"
+                    }
+                }
+            }
+        },
+        "/highways/{highwayId}": {
+            "get": {
+                "description": "Returns information about one specific BC highway",
+                "parameters": [
+                    {
+                        "name": "highwayId",
+                        "in": "path",
+                        "description": "The unique ID of a specific BC highway.  For example: '99A' is the highwayId for King George Blvd.",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "highways"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Information about a specific BC highway"
+                    }
+                }
+            }
+        },
+        "/highways/{highwayId}/webcams": {
+            "get": {
+                "description": "Returns a list of cameras (web cams) on one specific BC highway",
+                "parameters": [
+                    {
+                        "name": "highwayId",
+                        "in": "path",
+                        "description": "The unique ID of a specific BC highway.  For example: '99A' is the highwayId for King George Blvd.",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "highways"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of web cams."
+                    }
+                }
+            }
+        },
+        "/statistics": {
+            "get": {
+                "description": "DriveBC Highway Cameras version 1 statistics",
+                "tags": [
+                    "statistics"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "DriveBC Highway Cameras statistics"
+                    }
+                }
+            }
+        },
+        "/statistics/staleAndDelayed": {
+            "get": {
+                "description": "DriveBC Highway Cameras stale and delayed statistics",
+                "tags": [
+                    "statistics"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "DriveBC Highway Cameras stale and delayed statistics"
+                    }
+                }
+            }
+        }
+    }
+}
